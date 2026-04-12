@@ -1,6 +1,29 @@
 #include <GL/glut.h>
 drawRightSideBuildings(){
 
+        //---------Right Top Hills---------------------//
+    glBegin(GL_POLYGON);
+    glColor3f(0.18f, 0.18f, 0.22f);
+    glVertex3f(862.6, 332.5, 0);
+    glVertex3f(921.5, 365, 0);
+    glVertex3f(952.5, 340, 0);
+    glVertex3f(968.75, 352.5, 0);
+    glVertex3f(984.37, 340, 0);
+    glVertex3f(1000, 345, 0);
+    glVertex3f(1000, 302.5, 0);
+    glVertex3f(921.5, 302.5, 0);
+    glVertex3f(918.4, 315, 0);
+    glVertex3f(906, 307.5, 0);
+    glVertex3f(906, 315, 0);
+    glVertex3f(898.25, 320, 0);
+    glVertex3f(890.5, 315, 0);
+    glVertex3f(881.2, 315, 0);
+    glVertex3f(881.2, 302.5, 0);
+    glVertex3f(875, 302, 0);
+    glVertex3f(875, 333.7, 0);
+    glVertex3f(862.6, 332.5, 0);
+    glEnd();
+
     //--------- Building 1----------------//
     glBegin(GL_POLYGON);
     glColor3f(0.45f, 0.45f, 0.48f);//left face of building
@@ -266,6 +289,5 @@ drawRightSideBuildings(){
     glVertex3f(962, 268, 0);
     glVertex3f(966, 268, 0);
     glEnd();
-
 }
 
