@@ -1,11 +1,13 @@
 #include <GL/gl.h>
 #include <GL/glut.h>
 #include "Objects.cpp"
+#include "MissileCarDesign.cpp"
 void display(void)
 {
 glClear(GL_COLOR_BUFFER_BIT);
 glColor3f(1.0, 1.0, 1.0);
 drawRightSideBuildings();
+drawMissileHolder();
 glutSwapBuffers();
 }
 void init(void)
