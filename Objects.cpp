@@ -1,6 +1,42 @@
 #include <GL/glut.h>
 drawRightSideBuildings(){
 
+
+    glBegin(GL_POLYGON);
+    glColor3f(0.01f, 0.01f, 0.15f);
+    glVertex3f(0, 285, 0);
+    glVertex3f(0, 500, 0);
+    glVertex3f(1000, 500, 0);
+    glVertex3f(1000, 285, 0);
+    glEnd();
+
+            //---------Left Top Hills---------------------//
+    glBegin(GL_POLYGON);
+    glColor3f(0.18f, 0.18f, 0.22f);
+    glVertex3f(0, 285, 0);
+    glVertex3f(0, 318, 0);
+    glVertex3f(27.5, 340.4, 0);
+    glVertex3f(56.25, 326, 0);
+    glVertex3f(71.25, 347, 0);
+    glVertex3f(80, 343.8, 0);
+    glVertex3f(112.5, 385, 0);
+    glVertex3f(150, 351, 0);
+    glVertex3f(160, 360, 0);
+    glVertex3f(187.5, 337.6, 0);
+    glVertex3f(200.5, 343.8, 0);
+    glVertex3f(213.5, 334, 0);
+    glVertex3f(221.25, 341.2, 0);
+    glVertex3f(243.7, 327, 0);
+    glVertex3f(255, 334, 0);
+    glVertex3f(281.5, 314.4, 0);
+    glVertex3f(290, 318, 0);
+    glVertex3f(307.5, 308.7, 0);
+    glVertex3f(315, 310.8, 0);
+    glVertex3f(337.5, 294.3, 0);
+    glVertex3f(343.5, 300, 0);
+    glVertex3f(375, 285, 0);
+    glEnd();
+
         //---------Right Top Hills---------------------//
     glBegin(GL_POLYGON);
     glColor3f(0.18f, 0.18f, 0.22f);
