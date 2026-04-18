@@ -22,7 +22,7 @@ drawMiniCircle(124.34, 213.58, 4);
 drawMiniCircle(140.34, 213.58, 4);
 drawMiniCircle(156.34, 213.58, 4);
 
-
+//------------2nd Missile-Tanker code---------//
 glPushMatrix();
 glTranslatef(10.0f, -280.0f, 0.0f);
 glScalef(1.5f, 1.5f, 1.0f);
