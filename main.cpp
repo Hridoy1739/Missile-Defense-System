@@ -2,12 +2,14 @@
 #include <GL/glut.h>
 #include "Objects.cpp"
 #include "MissileCarDesign.cpp"
+#include "missile.cpp"
 void display(void)
 {
 glClear(GL_COLOR_BUFFER_BIT);
 glColor3f(1.0, 1.0, 1.0);
 drawRightSideBuildings();
 drawMissileHolder();
+drawMissile();
 glutSwapBuffers();
 }
 void init(void)
@@ -26,7 +28,13 @@ int main(int argc, char** argv)
     glutInitWindowPosition(10, 10);
     glutCreateWindow("Missile Defense System");
     init();
+     launchMissile(
+        0, 0,        // start
+        300, 250,    // control (height)
+        700, -200    // end
+    );
     glutDisplayFunc(display);
+    glutTimerFunc(0, updateMissile, 0);
     glutMainLoop();
     return 0;
 }
