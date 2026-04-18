@@ -21,6 +21,23 @@ drawMiniCircle(108.34, 213.58, 4);
 drawMiniCircle(124.34, 213.58, 4);
 drawMiniCircle(140.34, 213.58, 4);
 drawMiniCircle(156.34, 213.58, 4);
+
+
+glPushMatrix();
+glTranslatef(10.0f, -280.0f, 0.0f);
+glScalef(1.5f, 1.5f, 1.0f);
+drawCircle(92.34, 213.58, 8);
+drawCircle(108.34, 213.58, 8);
+drawCircle(124.34, 213.58, 8);
+drawCircle(140.34, 213.58, 8);
+drawCircle(156.34, 213.58, 8);
+drawMiniCircle(92.34, 213.58, 4);
+drawMiniCircle(108.34, 213.58, 4);
+drawMiniCircle(124.34, 213.58, 4);
+drawMiniCircle(140.34, 213.58, 4);
+drawMiniCircle(156.34, 213.58, 4);
+glPopMatrix();
+
 glutSwapBuffers();
 }
 void init(void)
