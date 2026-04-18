@@ -1,13 +1,18 @@
 #include <GL/glut.h>
-
+#include <math.h>
 // =====================
 // Bezier variables
 // =====================
 float t = 0.0f;
 
-float x0 = 0.0f, y0 = 0.0f;
-float x1 = 300.0f, y1 = 250.0f;
-float x2 = 700.0f, y2 = -200.0f;
+// Start (matched with shape position for smooth start)
+float xStart = 165.0f, yStart = 270.0f;
+
+// Control (adjusted for better curve)
+float xCP = 400.0f, yCP = 500.0f;
+
+// End (your target)
+float xEnd = 782.0f, yEnd = 340.0f;
 
 float x = 0.0f, y = 0.0f;
 
@@ -18,7 +23,7 @@ float maxScale = 1.5f;
 float minScale = 0.3f;
 float scale = 1.0f;
 
-// Approx center of your shape
+// Shape center
 float cx = 168.0f;
 float cy = 272.0f;
 
@@ -36,7 +41,7 @@ void drawMissile() {
     glScalef(scale, scale, 1.0f);
     glTranslatef(-cx, -cy, 0);
 
-    glColor3f(0.2f, 0.2f, 0.2f);
+    glColor3f(1.0f, 0.0f, 0.0f);
 
     glBegin(GL_POLYGON);
     glVertex3f(165.67, 270.28, 0.0f);
@@ -57,16 +62,15 @@ void drawMissile() {
 // Update Animation
 // =====================
 void updateMissile(int value) {
-    t += 0.01f;
+    t += 0.006f; // smoother & slightly faster
 
-    // RESET when finished (THIS is the key)
     if (t > 1.0f) {
-        t = 0.0f;   // restart animation
+        t = 0.0f;
     }
 
     // Bezier motion
-    x = (1 - t)*(1 - t)*x0 + 2*(1 - t)*t*x1 + t*t*x2;
-    y = (1 - t)*(1 - t)*y0 + 2*(1 - t)*t*y1 + t*t*y2;
+    x = (1 - t)*(1 - t)*xStart + 2*(1 - t)*t*xCP + t*t*xEnd;
+    y = (1 - t)*(1 - t)*yStart + 2*(1 - t)*t*yCP + t*t*yEnd;
 
     // Scaling
     scale = maxScale - t * (maxScale - minScale);
@@ -81,8 +85,8 @@ void updateMissile(int value) {
 void launchMissile(float sx, float sy, float cx_, float cy_, float ex, float ey) {
     t = 0.0f;
 
-    x0 = sx; y0 = sy;
-    x1 = cx_; y1 = cy_;
-    x2 = ex; ey = ey;
-    y2 = ey;
+    xStart = sx; yStart = sy;
+    xCP = cx_; yCP = cy_;
+    xEnd = ex;
+    yEnd = ey;
 }

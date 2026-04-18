@@ -1,4 +1,6 @@
 #include <GL/gl.h>
+#include <stdio.h>
+#include <math.h>
 
 drawMissileHolder(){
 
@@ -133,3 +135,25 @@ glVertex3f(718.55, 265.33, 0);
 
 glEnd();
 }
+
+void drawCircle(float CX, float CY, float R)
+{
+    glBegin(GL_POLYGON);
+    glColor3f(0.0f, 0.5f, 0.0f);
+    for (float i = 0.0; i < 360.00; i++) {
+        float angle = i * 3.14159 / 180;
+        glVertex2f(CX + R * cos(angle), CY + R * sin(angle));
+    }
+    glEnd();
+}
+void drawMiniCircle(float CX, float CY, float R)
+{
+    glBegin(GL_POLYGON);
+    glColor3f(0.0f, 0.0f, 0.0f);
+    for (float i = 0.0; i < 360.00; i++) {
+        float angle = i * 3.14159 / 180;
+        glVertex2f(CX + R * cos(angle), CY + R * sin(angle));
+    }
+    glEnd();
+}
+

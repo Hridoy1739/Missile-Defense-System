@@ -3,6 +3,7 @@
 #include "Objects.cpp"
 #include "MissileCarDesign.cpp"
 #include "missile.cpp"
+#include <math.h>
 void display(void)
 {
 glClear(GL_COLOR_BUFFER_BIT);
@@ -10,6 +11,16 @@ glColor3f(1.0, 1.0, 1.0);
 drawRightSideBuildings();
 drawMissileHolder();
 drawMissile();
+drawCircle(92.34, 213.58, 8);
+drawCircle(108.34, 213.58, 8);
+drawCircle(124.34, 213.58, 8);
+drawCircle(140.34, 213.58, 8);
+drawCircle(156.34, 213.58, 8);
+drawMiniCircle(92.34, 213.58, 4);
+drawMiniCircle(108.34, 213.58, 4);
+drawMiniCircle(124.34, 213.58, 4);
+drawMiniCircle(140.34, 213.58, 4);
+drawMiniCircle(156.34, 213.58, 4);
 glutSwapBuffers();
 }
 void init(void)
@@ -30,8 +41,8 @@ int main(int argc, char** argv)
     init();
      launchMissile(
         0, 0,        // start
-        300, 250,    // control (height)
-        700, -200    // end
+        150, 100,    // control (height)
+        600, 65    // end
     );
     glutDisplayFunc(display);
     glutTimerFunc(0, updateMissile, 0);
