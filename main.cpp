@@ -50,6 +50,18 @@ void init(void)
    glOrtho(0, 1000, 0, 500, 100, -100);
 }
 
+//------------Keyboard function----------------//
+void keyboard(unsigned char key, int x, int y){
+
+    switch(key){
+        case ' ':
+            fireInterceptor(); // SPACE = FIRE
+            break;
+    }
+}
+
+
+
 int main(int argc, char** argv)
 {
     glutInit(&argc, argv);
@@ -68,6 +80,7 @@ int main(int argc, char** argv)
     glutDisplayFunc(display);
 //    glutTimerFunc(0, updateMissile, 0);
     glutTimerFunc(0, updateSystem, 0);
+    glutKeyboardFunc(keyboard);
     glutMainLoop();
     return 0;
 }
