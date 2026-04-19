@@ -23,15 +23,15 @@ struct Explosion {
 };
 
 // =====================
-Missile missiles[20];
-Explosion explosions[10];
+Missile missiles[30];
+Explosion explosions[15];
 int missileCount = 0;
 
 // =====================
-// TIMER FOR AUTO SPAWN
+// SPAWN TIMER
 // =====================
 float spawnTimer = 0;
-float nextSpawnTime = 120; // ~2 sec
+float nextSpawnTime = 120;
 
 // =====================
 float distance(float x1,float y1,float x2,float y2){
@@ -39,10 +39,8 @@ float distance(float x1,float y1,float x2,float y2){
 }
 
 // =====================
-// RANDOM TIME (2–4 sec)
-// =====================
 float getRandomTime(){
-    return (rand()%120) + 120; // 120–240 frames
+    return (rand()%120) + 120; // 2â€“4 sec
 }
 
 // =====================
@@ -50,7 +48,7 @@ float getRandomTime(){
 // =====================
 void createMissile(float sx,float sy,float cx,float cy,float ex,float ey,bool interceptor){
 
-    if(missileCount >= 18) missileCount = 0;
+    if(missileCount >= 28) missileCount = 0;
 
     missiles[missileCount].t = 0;
     missiles[missileCount].sx = sx;
@@ -65,14 +63,11 @@ void createMissile(float sx,float sy,float cx,float cy,float ex,float ey,bool in
     missileCount++;
 }
 
-
-
-
 // =====================
 // EXPLOSION
 // =====================
 void createExplosion(float x,float y){
-    for(int i=0;i<10;i++){
+    for(int i=0;i<15;i++){
         if(!explosions[i].active){
             explosions[i].x = x;
             explosions[i].y = y;
@@ -84,7 +79,29 @@ void createExplosion(float x,float y){
 }
 
 // =====================
-// INIT SYSTEM
+// FIRE INTERCEPTOR (KEY)
+// =====================
+void fireInterceptor(){
+
+    float sx = 700;
+    float sy = 250;
+
+    float angle = 140.0f; // ðŸ”¥ adjust aim here
+
+    float rad = angle * 3.1416 / 180.0f;
+    float dist = 800;
+
+    float ex = sx + cos(rad)*dist;
+    float ey = sy + sin(rad)*dist;
+
+    float cx = (sx + ex)/2;
+    float cy = (sy + ey)/2 + 150;
+
+    createMissile(sx, sy, cx, cy, ex, ey, true);
+}
+
+// =====================
+// INIT
 // =====================
 void initMissileSystem(){
     srand(time(0));
@@ -96,59 +113,27 @@ void initMissileSystem(){
 void updateSystem(int value){
 
     // =====================
-    // AUTO SPAWN MISSILES
+    // AUTO ENEMY SPAWN
     // =====================
-// =====================
-// AUTO SPAWN MISSILES
-// =====================
-spawnTimer++;
+    spawnTimer++;
 
-if(spawnTimer >= nextSpawnTime){
+    if(spawnTimer >= nextSpawnTime){
 
-    spawnTimer = 0;
-    nextSpawnTime = getRandomTime();
+        spawnTimer = 0;
+        nextSpawnTime = getRandomTime();
 
-    // RANDOM TARGET (RIGHT SIDE BUILDINGS)
-    float targetX = 750 + rand()%200;
-    float targetY = 260 + rand()%120;
+        float targetX = 750 + rand()%200;
+        float targetY = 260 + rand()%120;
 
-    // RANDOM LEFT LAUNCHER
-    int side = rand()%2;
+        int side = rand()%2;
 
-    float sx, sy, cx, cy;
-
-    if(side == 0){
-        sx = 165; sy = 270;
-        cx = 400; cy = 500;
-    } else {
-        sx = 250; sy = 120;
-        cx = 450; cy = 450;
+        if(side == 0){
+            createMissile(165,270,400,500,targetX,targetY,false);
+        }
+        else{
+            createMissile(250,120,450,450,targetX,targetY,false);
+        }
     }
-
-    // CREATE ATTACK MISSILE
-    createMissile(sx, sy, cx, cy, targetX, targetY, false);
-
-    // =====================
-    // INTERCEPTOR LOGIC
-    // =====================
-
-    int defenseChance = rand()%100;
-
-    if(defenseChance < 60){  // 60% chance to defend
-
-        // add randomness so it MISSES sometimes
-        float offsetX = (rand()%80) - 40;
-        float offsetY = (rand()%80) - 40;
-
-        createMissile(
-            700, 250,          // right launcher
-            500, 400,
-            targetX + offsetX, // NOT perfect target
-            targetY + offsetY,
-            true
-        );
-    }
-}
 
     // =====================
     // UPDATE MISSILES
@@ -161,6 +146,12 @@ if(spawnTimer >= nextSpawnTime){
 
         if(missiles[i].t > 1){
             missiles[i].active = false;
+
+            // ðŸ’¥ explosion if enemy hits building
+            if(!missiles[i].isInterceptor){
+                createExplosion(missiles[i].ex, missiles[i].ey);
+            }
+
             continue;
         }
 
@@ -178,7 +169,7 @@ if(spawnTimer >= nextSpawnTime){
     }
 
     // =====================
-    // COLLISION DETECTION
+    // COLLISION
     // =====================
     for(int i=0;i<missileCount;i++){
         for(int j=0;j<missileCount;j++){
@@ -204,7 +195,7 @@ if(spawnTimer >= nextSpawnTime){
     // =====================
     // UPDATE EXPLOSIONS
     // =====================
-    for(int i=0;i<10;i++){
+    for(int i=0;i<15;i++){
         if(!explosions[i].active) continue;
 
         explosions[i].radius += 1.5f;
@@ -250,7 +241,7 @@ void drawAllMissiles(){
 // =====================
 void drawExplosions(){
 
-    for(int i=0;i<10;i++){
+    for(int i=0;i<15;i++){
 
         if(!explosions[i].active) continue;
 
