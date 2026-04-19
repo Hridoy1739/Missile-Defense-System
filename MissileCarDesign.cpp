@@ -140,7 +140,7 @@ glScalef(-0.4f, 0.4f, 1.0f);
 glTranslatef(-120.0f, -240.0f, 0.0f);
 
 
-// ===== YOUR SAME CAR CODE =====
+// ===== YOUR SAME CAR CODE ===========//
 glBegin(GL_POLYGON);// Missile
 glColor3f(0.12f, 0.18f, 0.08f);
 glVertex3f(60.31, 244.78, 0);

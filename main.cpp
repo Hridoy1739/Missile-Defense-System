@@ -10,7 +10,9 @@ glClear(GL_COLOR_BUFFER_BIT);
 glColor3f(1.0, 1.0, 1.0);
 drawRightSideBuildings();
 drawMissileHolder();
-drawMissile();
+//drawMissile();
+    drawAllMissiles();     // NEW
+    drawExplosions();      // NEW
 drawCircle(92.34, 213.58, 8);
 drawCircle(108.34, 213.58, 8);
 drawCircle(124.34, 213.58, 8);
@@ -56,13 +58,16 @@ int main(int argc, char** argv)
     glutInitWindowPosition(10, 10);
     glutCreateWindow("Missile Defense System");
     init();
-     launchMissile(
+ /*    launchMissile(
         0, 0,        // start
         150, 100,    // control (height)
         600, 65    // end
     );
+*/
+    initMissileSystem(); // NEW
     glutDisplayFunc(display);
-    glutTimerFunc(0, updateMissile, 0);
+//    glutTimerFunc(0, updateMissile, 0);
+    glutTimerFunc(0, updateSystem, 0);
     glutMainLoop();
     return 0;
 }
