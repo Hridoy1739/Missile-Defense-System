@@ -3,6 +3,13 @@
 #include <stdlib.h>
 #include <time.h>
 
+
+
+
+
+int score = 0;
+int missed = 0;
+
 // =====================
 // STRUCTS
 // =====================
@@ -86,7 +93,7 @@ void fireInterceptor(){
     float sx = 700;
     float sy = 250;
 
-    float angle = 140.0f; // 🔥 adjust aim here
+    float angle = 140.0f; // adjust aim here
 
     float rad = angle * 3.1416 / 180.0f;
     float dist = 800;
@@ -95,16 +102,18 @@ void fireInterceptor(){
     float ey = sy + sin(rad)*dist;
 
     float cx = (sx + ex)/2;
-    float cy = (sy + ey)/2 + 150;
+    float cy = (sy + ey)/2 + 150;// for fixing the Bezier Curve Control point
 
     createMissile(sx, sy, cx, cy, ex, ey, true);
+    // SOUND ADD
+   PlaySound(TEXT("launch"), NULL, SND_FILENAME | SND_ASYNC);
 }
 
 // =====================
 // INIT
 // =====================
 void initMissileSystem(){
-    srand(time(0));
+    srand(time(0));//random run
 }
 
 // =====================
@@ -125,7 +134,7 @@ void updateSystem(int value){
         float targetX = 750 + rand()%200;
         float targetY = 260 + rand()%120;
 
-        int side = rand()%2;
+        int side = rand()%2;// choosing enemy missile car
 
         if(side == 0){
             createMissile(165,270,400,500,targetX,targetY,false);
@@ -133,6 +142,8 @@ void updateSystem(int value){
         else{
             createMissile(250,120,450,450,targetX,targetY,false);
         }
+        // -------SOUND ADD (enemy launch)
+        PlaySound(TEXT("launch"), NULL, SND_FILENAME | SND_ASYNC);
     }
 
     // =====================
@@ -142,12 +153,12 @@ void updateSystem(int value){
 
         if(!missiles[i].active) continue;
 
-        missiles[i].t += 0.01f;
+        missiles[i].t += 0.004f;
 
         if(missiles[i].t > 1){
             missiles[i].active = false;
 
-            // 💥 explosion if enemy hits building
+            // ----explosion if enemy hits building
             if(!missiles[i].isInterceptor){
                 createExplosion(missiles[i].ex, missiles[i].ey);
             }
@@ -156,16 +167,9 @@ void updateSystem(int value){
         }
 
         float t = missiles[i].t;
-
-        missiles[i].x =
-        (1-t)*(1-t)*missiles[i].sx +
-        2*(1-t)*t*missiles[i].cx +
-        t*t*missiles[i].ex;
-
-        missiles[i].y =
-        (1-t)*(1-t)*missiles[i].sy +
-        2*(1-t)*t*missiles[i].cy +
-        t*t*missiles[i].ey;
+        //Quadratic Bezier Curve formula//
+        missiles[i].x = (1-t)*(1-t)*missiles[i].sx + 2*(1-t)*t*missiles[i].cx + t*t*missiles[i].ex;
+        missiles[i].y = (1-t)*(1-t)*missiles[i].sy + 2*(1-t)*t*missiles[i].cy + t*t*missiles[i].ey;
     }
 
     // =====================
@@ -187,6 +191,8 @@ void updateSystem(int value){
                     missiles[j].active = false;
 
                     createExplosion(missiles[i].x, missiles[i].y);
+                    // SOUND PLAY ON EXPLOSION//
+    PlaySound(TEXT("explosion"), NULL, SND_FILENAME | SND_ASYNC);
                 }
             }
         }

@@ -1,9 +1,15 @@
 #include <GL/gl.h>
 #include <GL/glut.h>
+#include <math.h>
 #include "Objects.cpp"
 #include "MissileCarDesign.cpp"
 #include "missile.cpp"
-#include <math.h>
+#include "scoreRadar.cpp"
+//======sound header===========//
+#include <windows.h>
+#include <mmsystem.h>
+#pragma comment(lib, "winmm.lib")
+
 void display(void)
 {
 glClear(GL_COLOR_BUFFER_BIT);
@@ -13,6 +19,8 @@ drawMissileHolder();
 //drawMissile();
     drawAllMissiles();     // NEW
     drawExplosions();      // NEW
+//    drawScore(); since we faces some problem so we will implement the radar part later//
+  //  drawRadar();
 drawCircle(92.34, 213.58, 8);
 drawCircle(108.34, 213.58, 8);
 drawCircle(124.34, 213.58, 8);

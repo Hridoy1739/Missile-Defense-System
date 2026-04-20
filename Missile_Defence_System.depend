@@ -1,11 +1,14 @@
 # depslib dependency file v1.0
-1776585635 source:c:\users\user\onedrive\desktop\missile_defence_system\main.cpp
+1776669361 source:c:\users\user\onedrive\desktop\missile_defence_system\main.cpp
 	<GL/gl.h>
 	<GL/glut.h>
+	<math.h>
 	"Objects.cpp"
 	"MissileCarDesign.cpp"
 	"missile.cpp"
-	<math.h>
+	"scoreRadar.cpp"
+	<windows.h>
+	<mmsystem.h>
 
 1526093414 c:\program files\codeblocks\mingw\x86_64-w64-mingw32\include\gl\gl.h
 	<windows.h>
@@ -885,7 +888,7 @@
 	<stdio.h>
 	<math.h>
 
-1776586100 c:\users\user\onedrive\desktop\missile_defence_system\missile.cpp
+1776678447 c:\users\user\onedrive\desktop\missile_defence_system\missile.cpp
 	<GL/glut.h>
 	<math.h>
 	<stdlib.h>
@@ -929,4 +932,8 @@
 
 1526093420 c:\program files\codeblocks\mingw\x86_64-w64-mingw32\include\pthread_time.h
 	<sys/timeb.h>
+
+1776587926 c:\users\user\onedrive\desktop\missile_defence_system\scoreradar.cpp
+	<stdio.h>
+	<math.h>
 
