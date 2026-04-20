@@ -173,47 +173,6 @@ glVertex3f(4.42, 0.46, 0.0f);
 
 glEnd();
 
-    //----------------sun------------------------------//
-    glBegin(GL_POLYGON);
-    glColor3f(1.0f, 0.8f, 0.2f);
-    glVertex3f(451.83, 285.01, 0);
-    glVertex3f(452.37, 286.95, 0);
-    glVertex3f(452.57, 288.54, 0);
-    glVertex3f(453.27, 290.12, 0);
-    glVertex3f(453.98, 291.87, 0);
-    glVertex3f(454.85, 293.61, 0);
-    glVertex3f(456.06, 295.34, 0);
-    glVertex3f(457.27, 297.07, 0);
-    glVertex3f(458.82, 298.78, 0);
-    glVertex3f(460.20, 299.96, 0);
-    glVertex3f(461.40, 300.97, 0);
-    glVertex3f(463.10, 301.78, 0);
-    glVertex3f(464.80, 302.60, 0);
-    glVertex3f(466.68, 303.58, 0);
-    glVertex3f(468.21, 304.04, 0);
-    glVertex3f(470.41, 304.47, 0);
-    glVertex3f(472.28, 304.73, 0);
-    glVertex3f(474.14, 304.82, 0);
-    glVertex3f(475.83, 304.74, 0);
-    glVertex3f(477.68, 304.65, 0);
-    glVertex3f(479.20, 304.40, 0);
-    glVertex3f(481.22, 303.94, 0);
-    glVertex3f(482.74, 303.51, 0);
-    glVertex3f(484.41, 302.72, 0);
-    glVertex3f(485.92, 301.93, 0);
-    glVertex3f(487.60, 301.14, 0);
-    glVertex3f(489.27, 299.98, 0);
-    glVertex3f(490.77, 298.66, 0);
-    glVertex3f(492.10, 297.70, 0);
-    glVertex3f(493.26, 296.40, 0);
-    glVertex3f(494.92, 294.71, 0);
-    glVertex3f(496.58, 292.67, 0);
-    glVertex3f(497.56, 290.65, 0);
-    glVertex3f(498.54, 288.82, 0);
-    glVertex3f(499.36, 287.00, 0);
-    glVertex3f(500.17, 285.17, 0);
-    glVertex3f(451.67, 285.19, 0);
-    glEnd();
 
 
             //---------Left Top Hills---------------------//
@@ -549,6 +508,40 @@ glEnd();
     glVertex3f(958, 268, 0);
     glVertex3f(962, 268, 0);
     glVertex3f(966, 268, 0);
+    glEnd();
+}
+
+void midPointCircle(int xc, int yc, int r) {
+    int x = 0, y = r;
+    int d = 1 - r;
+
+    glBegin(GL_POLYGON);
+    glColor3f(1.0, 1.0, 1.0);
+
+    while (x <= y) {
+
+        // draw horizontal spans
+        glVertex2i(xc - x, yc + y);
+        glVertex2i(xc + x, yc + y);
+
+        glVertex2i(xc - x, yc - y);
+        glVertex2i(xc + x, yc - y);
+
+        glVertex2i(xc - y, yc + x);
+        glVertex2i(xc + y, yc + x);
+
+        glVertex2i(xc - y, yc - x);
+        glVertex2i(xc + y, yc - x);
+
+        if (d < 0)
+            d = d + 2 * x + 3;
+        else {
+            d = d + 2 * (x - y) + 5;
+            y--;
+        }
+        x++;
+    }
+
     glEnd();
 }
 

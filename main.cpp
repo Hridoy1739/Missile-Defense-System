@@ -15,6 +15,7 @@ void display(void)
 glClear(GL_COLOR_BUFFER_BIT);
 glColor3f(1.0, 1.0, 1.0);
 drawRightSideBuildings();
+midPointCircle(900, 450, 5);
 drawMissileHolder();
 //drawMissile();
     drawAllMissiles();     // NEW
